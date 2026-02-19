@@ -148,6 +148,15 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "docker-compose.production.yml"
           target: "kittygram"
+      - name: Copy .env.example as .env to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: ".env.example"
+          target: "kittygram/.env"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
