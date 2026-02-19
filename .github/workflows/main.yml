@@ -156,7 +156,16 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: ".env.example"
-          target: "kittygram/.env"
+          target: "kittygram"
+      - name: Rename .env.example to .env on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            mv kittygram/.env.example kittygram/.env
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
