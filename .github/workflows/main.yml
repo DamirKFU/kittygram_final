@@ -141,4 +141,13 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Деплой успешно выполнен!
+        message: |
+          🚀 *Деплой успешно выполнен!*
+          
+          🔥 Новый пуш от *${{ github.actor }}*.
+
+          📝 Сообщение коммита: 
+          ${{ github.event.commits[0].message }}
+
+          🔗 Ссылка на коммит: 
+          https://github.com/${{ github.repository }}/commit/${{ github.sha }}
